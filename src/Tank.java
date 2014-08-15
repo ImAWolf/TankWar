@@ -188,7 +188,7 @@ public class Tank {
 		int x = this.x + Tank.TANKWIDTH/2 - Missile.MISSILEWIDTH/2; 
 		int y = this.y + Tank.TANKHIGHT/2 - Missile.MISSILEHIGHT/2;
 		
-		Missile m = new Missile(x,y,ptDir);
+		Missile m = new Missile(x,y,ptDir,tf);
 		tf.missiles.add(m);
 		return m;
 	}

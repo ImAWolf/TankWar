@@ -19,8 +19,8 @@ public class TankClient {
 @SuppressWarnings("serial")
 class TankFrame extends Frame {
 	//游戏界面大小
-	private static final int GAME_WIDTH = 400;
-	private static final int GAME_HIGHT = 400;		
+	public static final int GAME_WIDTH = 400;
+	public static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
 	
 	Tank myTank = new Tank(50,50,this);
@@ -57,7 +57,7 @@ class TankFrame extends Frame {
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
-			m.draw(g);
+			m.draw(g);		
 		}
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法

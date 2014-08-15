@@ -9,12 +9,21 @@ public class Missile {
 	public static final int MISSILEHIGHT = 10;
 	private int x;
 	private int y;
-	Tank.Direction dir;
+	public Tank.Direction dir;
+	private boolean live = true;
+	private TankFrame tf;
 		
 	public Missile(int x, int y, Tank.Direction ptDir) {
 		this.x = x;
 		this.y = y;
 		this.dir = ptDir;
+	}
+	
+	public Missile(int x, int y, Tank.Direction ptDir,TankFrame tf) {
+		this.x = x;
+		this.y = y;
+		this.dir = ptDir;
+		this.tf = tf;
 	}
 	
 	public void draw(Graphics g) {
@@ -24,6 +33,13 @@ public class Missile {
 		g.setColor(c);
 		
 		move();
+	}
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
 	}
 
 	private void move() {
@@ -57,6 +73,10 @@ public class Missile {
 			y += YSPEED;
 			break;		
 		}
-	}
-	
+		
+		if(x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HIGHT) {
+			live = false;
+			tf.missiles.remove(this);
+		}	
+	}	
 }
