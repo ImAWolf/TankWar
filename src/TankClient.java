@@ -24,7 +24,7 @@ class TankFrame extends Frame {
 	private Image offScreenImage = null;
 	
 	public Wall w1 = new Wall(200,200,20,150,this);
-	
+	Blood b = new Blood();
 	Tank myTank = new Tank(300,300,true,Tank.Direction.STOP,this);
 	 
 	List<Explode> explodes = new ArrayList<Explode>();
@@ -70,7 +70,9 @@ class TankFrame extends Frame {
 		
 		
 		myTank.draw(g);
+		myTank.eat(b);
 		w1.draw(g);
+		b.draw(g);
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
