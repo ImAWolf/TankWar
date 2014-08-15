@@ -23,7 +23,9 @@ class TankFrame extends Frame {
 	public static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
 	
-	Tank myTank = new Tank(100,100,true,Tank.Direction.STOP,this);
+	public Wall w1 = new Wall(200,200,20,150,this);
+	
+	Tank myTank = new Tank(300,300,true,Tank.Direction.STOP,this);
 	 
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
@@ -65,13 +67,14 @@ class TankFrame extends Frame {
 		g.drawString(str, 10, 70);
 		
 		myTank.draw(g);
-		
+		w1.draw(g);
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
 			m.draw(g);
 			m.hitTanks(tanks);
-			m.hitTank(myTank);
+			//m.hitTank(myTank);
+			m.hitWall(w1);
 		}
 		
 		for(int i=0; i<explodes.size(); i++) {
@@ -82,6 +85,7 @@ class TankFrame extends Frame {
 		for(int i=0; i<tanks.size(); i++) {
 			Tank t = tanks.get(i);
 			t.draw(g);
+			t.colliedWall(w1);
 		}
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法

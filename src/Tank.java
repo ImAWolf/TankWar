@@ -19,6 +19,7 @@ public class Tank {
 	public TankFrame tf;
 	public boolean bGood;
 	public boolean live = true;
+	public int oldX,oldY;
 	
 	public static Random r = new Random();
 	private int step = r.nextInt(12) + 3;
@@ -34,6 +35,8 @@ public class Tank {
 		this.x = x;
 		this.y = y;
 		this.bGood = bGood;
+		this.oldX = x;
+		this.oldY = y;
 	}
 	
 	public Tank(int x, int y,boolean bGood,TankFrame tf) {
@@ -97,6 +100,9 @@ public class Tank {
 	}
 
 	public void move() {
+		this.oldX = x;
+		this.oldY = y;
+		
 		switch (dir) {
 		case L:
 			x -= XSPEED;
@@ -162,6 +168,7 @@ public class Tank {
 			if(r.nextInt(40) > 38 )
 				this.fire();
 		}
+				
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -255,7 +262,18 @@ public class Tank {
 		return new Rectangle(x,y,TANKWIDTH,TANKHIGHT);
 	}
 	
+	public boolean colliedWall(Wall w) {
+		if(this.live && this.getRect().intersects(w.getRect())) {
+			this.stay();			
+			return true;
+		}		
+		return false;
+	}
 	
+	private void stay() {
+		x = oldX;
+		y = oldY;
+	}
 	
 	public int getX() {
 		return x;

@@ -35,7 +35,10 @@ public class Missile {
 		}
 		
 		Color c = g.getColor();
-		g.setColor(Color.black);
+		if(this.good == true)
+			g.setColor(Color.black);
+		else
+			g.setColor(Color.blue);
 		g.fillOval(x, y, MISSILEWIDTH, MISSILEHIGHT);
 		g.setColor(c);
 		
@@ -113,6 +116,16 @@ public class Missile {
 			if(hitTank(t)) {				
 				return true;
 			}
+		}
+		
+		return false;
+	}
+	
+	public boolean hitWall(Wall w) {
+		if(this.live && this.getRect().intersects(w.getRect())) {
+			this.live = false;
+			
+			return true;
 		}
 		
 		return false;
