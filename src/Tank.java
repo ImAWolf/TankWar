@@ -106,7 +106,24 @@ public class Tank {
 			break;
 		case STOP:
 			break;
-
+		}
+		
+		int borderL = 3;
+		int borderU = 25;
+		int borderR = TankFrame.GAME_WIDTH - this.TANKWIDTH - 3;
+		int borderD = TankFrame.GAME_HIGHT - this.TANKHIGHT - 3;
+		
+		if(x < borderL) {
+			x = 3;
+		}
+		if(y < borderU) {
+			y = borderU;
+		}
+		if(x > borderR) {
+			x = borderR;
+		}
+		if(y > borderD) {
+			y = borderD;
 		}
 	}
 
