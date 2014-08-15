@@ -22,7 +22,8 @@ public class Tank {
 	};
 
 	private Direction dir = Direction.STOP;
-
+	private Direction ptDir = Direction.D;
+	
 	public Tank(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -39,6 +40,36 @@ public class Tank {
 		g.setColor(Color.red);
 		g.fillOval(x, y, TANKWIDTH, TANKHIGHT);
 		g.setColor(c);
+		
+		switch (ptDir) {
+		case L:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x, y+Tank.TANKHIGHT/2);
+			break;
+		case LU:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x, y);
+			break;
+		case U:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x+Tank.TANKWIDTH/2, y);
+			break;
+		case RU:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x+Tank.TANKWIDTH, y);
+			break;
+		case R:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x+Tank.TANKWIDTH, y+Tank.TANKHIGHT/2);
+			break;
+		case RD:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x+Tank.TANKWIDTH, y+Tank.TANKHIGHT);
+			break;
+		case D:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT);
+			break;
+		case LD:
+			g.drawLine(x+Tank.TANKWIDTH/2, y+Tank.TANKHIGHT/2, x, y+Tank.TANKHIGHT);
+			break;
+		case STOP:
+			break;
+
+		}
 		
 		move();
 	}
@@ -148,13 +179,16 @@ public class Tank {
 		} else if (bL && bU && bR && bD) { 
 			dir = Direction.STOP;
 		}
+		
+		if(this.dir != Direction.STOP)
+			ptDir = dir;
 	}
 
 	public Missile fire() {
 		int x = this.x + Tank.TANKWIDTH/2 - Missile.MISSILEWIDTH/2; 
 		int y = this.y + Tank.TANKHIGHT/2 - Missile.MISSILEHIGHT/2;
 		
-		Missile m = new Missile(x,y,dir);
+		Missile m = new Missile(x,y,ptDir);
 		
 		return m;
 	}

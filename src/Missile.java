@@ -11,10 +11,10 @@ public class Missile {
 	private int y;
 	Tank.Direction dir;
 		
-	public Missile(int x, int y, Tank.Direction dir) {
+	public Missile(int x, int y, Tank.Direction ptDir) {
 		this.x = x;
 		this.y = y;
-		this.dir = dir;
+		this.dir = ptDir;
 	}
 	
 	public void draw(Graphics g) {
