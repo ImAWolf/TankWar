@@ -14,6 +14,9 @@ public class TankClient {
 
 @SuppressWarnings("serial")
 class TankFrame extends Frame {
+	private static final int GAME_WIDTH = 400;
+	private static final int GAME_HIGHT = 400;
+	
 	private int x = 50;
 	private int y = 50;	
 	private Image offScreenImage = null;
@@ -24,7 +27,7 @@ class TankFrame extends Frame {
 
 	public void launch() {
 		this.setLocation(400, 300);
-		this.setSize(400, 400);
+		this.setSize(GAME_WIDTH, GAME_HIGHT);
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setBackground(Color.green);
@@ -52,14 +55,14 @@ class TankFrame extends Frame {
 	@Override
 	public void update(Graphics g) {
 		if(offScreenImage == null) {
-			offScreenImage = this.createImage(400, 400);
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HIGHT);
 		}
 		//获取画笔
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.GREEN);
 		//重绘窗口
-		gOffScreen.fillRect(0, 0, 400, 400);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_WIDTH);
 		gOffScreen.setColor(c);
 		
 		paint(gOffScreen);
