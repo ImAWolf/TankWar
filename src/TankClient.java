@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -33,6 +35,8 @@ class TankFrame extends Frame {
 		this.setBackground(Color.green);
 		new Thread(new PaintThread()).start();
 
+		this.addKeyListener(new KeyMonitor());
+		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
@@ -46,9 +50,6 @@ class TankFrame extends Frame {
 		g.setColor(Color.red);
 		g.fillOval(x, y, 30, 30);
 		g.setColor(c);
-
-		x += 5;
-		y += 2;
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法
 	//双缓冲方法
@@ -85,4 +86,41 @@ class TankFrame extends Frame {
 		}
 
 	}
+
+	private class KeyMonitor extends KeyAdapter {
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			switch(key) {
+			case KeyEvent.VK_LEFT:
+				x -= 5;
+				break;
+			case KeyEvent.VK_UP:
+				y -= 5;
+				break;
+			case KeyEvent.VK_RIGHT:
+				x += 5;
+				break;
+			case KeyEvent.VK_DOWN:
+				y += 5;
+				break;
+			}
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
