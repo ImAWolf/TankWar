@@ -177,8 +177,16 @@ public class Tank {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		//if(this.live == false) return;
+		
 		int key = e.getKeyCode();
-		switch (key) {		
+		switch (key) {
+		case KeyEvent.VK_F2:
+			if(!this.live) {
+				this.live = true;
+				this.life = 100;
+			}
+			break;
 		case KeyEvent.VK_LEFT:
 			bL = true;
 			break;
@@ -196,6 +204,8 @@ public class Tank {
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		if(this.live == false) return;
+		
 		int key = e.getKeyCode();
 		switch (key) {
 		case KeyEvent.VK_CONTROL:

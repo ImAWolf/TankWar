@@ -11,8 +11,12 @@ import java.util.List;
 
 public class TankClient {	
 	public static void main(String[] args) {
-		TankFrame tf = new TankFrame();
-		tf.launch();
+		try {
+			TankFrame tf = new TankFrame();
+			tf.launch();
+		} catch(Exception e) {
+			
+		}
 	}
 }
 
@@ -68,6 +72,12 @@ class TankFrame extends Frame {
 		str = "tank life:" + myTank.life;
 		g.drawString(str, 10, 85);
 		
+		if(tanks.size() <= 0) {
+			for(int i=0; i<5; i++) {
+				Tank t = new Tank(50 + 40*(i+1),50,false,Tank.Direction.D,this); 
+				tanks.add(t);
+			}
+		}
 		
 		myTank.draw(g);
 		myTank.eat(b);
