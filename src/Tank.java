@@ -14,8 +14,8 @@ public class Tank {
 	private boolean bU = false;
 	private boolean bD = false;
 	private boolean bR = false;
-
 	public TankFrame tf;
+	public boolean bGood;
 	
 	public enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
@@ -24,20 +24,23 @@ public class Tank {
 	private Direction dir = Direction.STOP;
 	private Direction ptDir = Direction.D;
 	
-	public Tank(int x, int y) {
+	public Tank(int x, int y,boolean bGood) {
 		this.x = x;
 		this.y = y;
+		this.bGood = bGood;
 	}
 	
-	public Tank(int x, int y,TankFrame tf) {
-		this.x = x;
-		this.y = y;
+	public Tank(int x, int y,boolean bGood,TankFrame tf) {
+		this(x,y,bGood);
 		this.tf = tf;
 	}
 
 	public void draw(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(Color.red);
+		if(bGood)
+			g.setColor(Color.red);
+		else 
+			g.setColor(Color.white);
 		g.fillOval(x, y, TANKWIDTH, TANKHIGHT);
 		g.setColor(c);
 		
@@ -110,8 +113,8 @@ public class Tank {
 		
 		int borderL = 3;
 		int borderU = 25;
-		int borderR = TankFrame.GAME_WIDTH - this.TANKWIDTH - 3;
-		int borderD = TankFrame.GAME_HIGHT - this.TANKHIGHT - 3;
+		int borderR = TankFrame.GAME_WIDTH - TANKWIDTH - 3;
+		int borderD = TankFrame.GAME_HIGHT - TANKHIGHT - 3;
 		
 		if(x < borderL) {
 			x = 3;

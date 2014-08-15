@@ -23,7 +23,8 @@ class TankFrame extends Frame {
 	public static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
 	
-	Tank myTank = new Tank(50,50,this);
+	Tank myTank = new Tank(50,50,true,this);
+	Tank enemyTank = new Tank(100,100,false,this);
 	//Missile m = null;
 	List<Missile> missiles = new ArrayList<Missile>();
 	
@@ -54,6 +55,7 @@ class TankFrame extends Frame {
 		g.drawString(str, 10, 40);
 		
 		myTank.draw(g);
+		enemyTank.draw(g);
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
@@ -111,17 +113,3 @@ class TankFrame extends Frame {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
