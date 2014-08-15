@@ -86,6 +86,7 @@ class TankFrame extends Frame {
 			Tank t = tanks.get(i);
 			t.draw(g);
 			t.colliedWall(w1);
+			t.colledesWithTanks(tanks);
 		}
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法
@@ -121,7 +122,6 @@ class TankFrame extends Frame {
 				}
 			}
 		}
-
 	}
 
 	private class KeyMonitor extends KeyAdapter {
@@ -135,7 +135,6 @@ class TankFrame extends Frame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			myTank.keyPressed(e);
-		}
-		
+		}		
 	}
 }

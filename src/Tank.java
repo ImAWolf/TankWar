@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Random;
 
 public class Tank {
@@ -270,6 +271,20 @@ public class Tank {
 		return false;
 	}
 	
+	public boolean colledesWithTanks(List<Tank> tanks) {
+		for(int i=0; i<tanks.size(); i++) {
+			Tank t = tanks.get(i);
+			if(this != t) {
+				if(this.live && t.live && this.getRect().intersects(t.getRect())) {
+					this.stay();	
+					t.stay();
+					return true;
+				}		
+			}
+		}		
+		return false;
+	}
+	
 	private void stay() {
 		x = oldX;
 		y = oldY;
@@ -290,6 +305,4 @@ public class Tank {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	
 }
