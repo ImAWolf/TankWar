@@ -86,6 +86,11 @@ class TankFrame extends Frame {
 
 	private class KeyMonitor extends KeyAdapter {
 
+		@Override
+		public void keyReleased(KeyEvent e) {
+			myTank.keyReleased(e);
+		}
+
 		//¿ØÖÆÌ¹¿ËÒÆ¶¯
 		@Override
 		public void keyPressed(KeyEvent e) {
