@@ -22,6 +22,7 @@ class TankFrame extends Frame {
 	private Image offScreenImage = null;
 	
 	Tank myTank = new Tank(50,50);
+	Missile m = new Missile(50,50,Tank.Direction.RD);
 	
 	public TankFrame() {
 		super("TankWar....");
@@ -47,6 +48,7 @@ class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		myTank.draw(g);
+		m.draw(g);
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法
 	//双缓冲方法
