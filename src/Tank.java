@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class Tank {
@@ -16,6 +17,7 @@ public class Tank {
 	private boolean bR = false;
 	public TankFrame tf;
 	public boolean bGood;
+	public boolean live = true;
 	
 	public enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
@@ -36,6 +38,8 @@ public class Tank {
 	}
 
 	public void draw(Graphics g) {
+		if(live != true) return;
+		
 		Color c = g.getColor();
 		if(bGood)
 			g.setColor(Color.red);
@@ -212,6 +216,12 @@ public class Tank {
 		tf.missiles.add(m);
 		return m;
 	}
+	
+	public Rectangle getRect() {
+		return new Rectangle(x,y,TANKWIDTH,TANKHIGHT);
+	}
+	
+	
 	
 	public int getX() {
 		return x;

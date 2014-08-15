@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-
 public class Missile {
 	private static final int XSPEED = 10;
 	private static final int YSPEED = 10;
@@ -94,6 +93,10 @@ public class Missile {
 		if(this.getRect().intersects(t.getRect()) && t.live) {
 			t.live = false;
 			this.live = false;
+			
+			Explode e = new Explode(x,y,this.tf);			
+			tf.explodes.add(e);
+			
 			return true;
 		}
 		

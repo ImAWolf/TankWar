@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TankClient {
+public class TankClient {	
 	public static void main(String[] args) {
 		TankFrame tf = new TankFrame();
 		tf.launch();
@@ -25,7 +25,7 @@ class TankFrame extends Frame {
 	
 	Tank myTank = new Tank(50,50,true,this);
 	Tank enemyTank = new Tank(100,100,false,this);
-	//Missile m = null;
+	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
 	
 	public TankFrame() {
@@ -53,13 +53,22 @@ class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		String str = "missile count:" + missiles.size();
 		g.drawString(str, 10, 40);
+		str = "explodes count:" + explodes.size();
+		g.drawString(str, 10, 50);
 		
 		myTank.draw(g);
 		enemyTank.draw(g);
+		 
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
-			m.draw(g);		
+			m.draw(g);
+			m.hitTank(enemyTank);
+		}
+		
+		for(int i=0; i<explodes.size(); i++) {
+			Explode e = explodes.get(i);
+			e.draw(g);
 		}
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法
