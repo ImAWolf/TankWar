@@ -16,12 +16,12 @@ public class TankClient {
 
 @SuppressWarnings("serial")
 class TankFrame extends Frame {
+	//游戏界面大小
 	private static final int GAME_WIDTH = 400;
-	private static final int GAME_HIGHT = 400;
-	
-	private int x = 50;
-	private int y = 50;	
+	private static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
+	
+	Tank myTank = new Tank(50,50);
 	
 	public TankFrame() {
 		super("TankWar....");
@@ -46,10 +46,7 @@ class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.red);
-		g.fillOval(x, y, 30, 30);
-		g.setColor(c);
+		myTank.draw(g);
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法
 	//双缓冲方法
@@ -89,23 +86,10 @@ class TankFrame extends Frame {
 
 	private class KeyMonitor extends KeyAdapter {
 
+		//控制坦克移动
 		@Override
 		public void keyPressed(KeyEvent e) {
-			int key = e.getKeyCode();
-			switch(key) {
-			case KeyEvent.VK_LEFT:
-				x -= 5;
-				break;
-			case KeyEvent.VK_UP:
-				y -= 5;
-				break;
-			case KeyEvent.VK_RIGHT:
-				x += 5;
-				break;
-			case KeyEvent.VK_DOWN:
-				y += 5;
-				break;
-			}
+			myTank.keyPressed(e);
 		}
 		
 	}
