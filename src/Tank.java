@@ -112,10 +112,7 @@ public class Tank {
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		switch (key) {
-		case KeyEvent.VK_CONTROL:
-			tf.m = fire();
-			break;
+		switch (key) {		
 		case KeyEvent.VK_LEFT:
 			bL = true;
 			break;
@@ -135,6 +132,9 @@ public class Tank {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
+		case KeyEvent.VK_CONTROL:
+			fire();
+			break;
 		case KeyEvent.VK_LEFT:
 			bL = false;
 			break;
@@ -189,7 +189,7 @@ public class Tank {
 		int y = this.y + Tank.TANKHIGHT/2 - Missile.MISSILEHIGHT/2;
 		
 		Missile m = new Missile(x,y,ptDir);
-		
+		tf.missiles.add(m);
 		return m;
 	}
 	
