@@ -23,16 +23,21 @@ class TankFrame extends Frame {
 	public static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
 	
-	Tank myTank = new Tank(50,50,true,this);
-	Tank enemyTank = new Tank(100,100,false,this);
+	Tank myTank = new Tank(100,100,true,this);
+	 
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
+	List<Tank> tanks = new ArrayList<Tank>();
 	
 	public TankFrame() {
 		super("TankWar....");
 	}
 
 	public void launch() {
+		for(int i=0; i<10; i++) {
+			tanks.add(new Tank(50 + 40*(i+1),50,false,this));
+		}
+		
 		this.setLocation(400, 300);
 		this.setSize(GAME_WIDTH, GAME_HIGHT);
 		this.setVisible(true);
@@ -54,21 +59,27 @@ class TankFrame extends Frame {
 		String str = "missile count:" + missiles.size();
 		g.drawString(str, 10, 40);
 		str = "explodes count:" + explodes.size();
-		g.drawString(str, 10, 50);
+		g.drawString(str, 10, 55);
+		str = "tanks count:" + tanks.size();
+		g.drawString(str, 10, 70);
 		
 		myTank.draw(g);
-		enemyTank.draw(g);
-		 
+		
 		
 		for(int i=0; i<missiles.size(); i++) {
 			Missile m = missiles.get(i);
 			m.draw(g);
-			m.hitTank(enemyTank);
+			m.hitTanks(tanks);
 		}
 		
 		for(int i=0; i<explodes.size(); i++) {
 			Explode e = explodes.get(i);
 			e.draw(g);
+		}
+		
+		for(int i=0; i<tanks.size(); i++) {
+			Tank t = tanks.get(i);
+			t.draw(g);
 		}
 	}
 	//调用repaint方法时，先调用update方法，再调用paint方法

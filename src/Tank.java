@@ -38,7 +38,12 @@ public class Tank {
 	}
 
 	public void draw(Graphics g) {
-		if(live != true) return;
+		if(live != true) {
+			if(bGood == false) {
+				tf.tanks.remove(this);
+			}
+			return;
+		}
 		
 		Color c = g.getColor();
 		if(bGood)

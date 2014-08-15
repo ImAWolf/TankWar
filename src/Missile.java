@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.List;
 
 public class Missile {
 	private static final int XSPEED = 10;
@@ -103,6 +104,15 @@ public class Missile {
 		return false;
 	}
 	
-	
+	public boolean hitTanks(List<Tank> tanks) {
+		for(int i=0; i<tanks.size(); i++) {
+			Tank t = tanks.get(i);
+			if(hitTank(t)) {				
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 }
