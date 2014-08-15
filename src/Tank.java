@@ -21,6 +21,7 @@ public class Tank {
 	public boolean live = true;
 	
 	public static Random r = new Random();
+	private int step = r.nextInt(12) + 3;
 	
 	public enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
@@ -149,8 +150,17 @@ public class Tank {
 		
 		if(!bGood) {
 			Direction[] dirs = Direction.values();
-			int rn = r.nextInt(dirs.length);
-			this.dir = dirs[rn];
+			
+			if(step == 0) {
+				int rn = r.nextInt(dirs.length);
+				this.dir = dirs[rn];			
+				this.ptDir = this.dir;
+				
+				step = r.nextInt(12) + 3;
+			}		
+			step --;	
+			if(r.nextInt(40) > 38 )
+				this.fire();
 		}
 	}
 
@@ -229,10 +239,14 @@ public class Tank {
 	}
 
 	public Missile fire() {
+		if(!live) {
+			return null;
+		}
+		
 		int x = this.x + Tank.TANKWIDTH/2 - Missile.MISSILEWIDTH/2; 
 		int y = this.y + Tank.TANKHIGHT/2 - Missile.MISSILEHIGHT/2;
 		
-		Missile m = new Missile(x,y,ptDir,tf);
+		Missile m = new Missile(x,y,this.bGood,ptDir,tf);
 		tf.missiles.add(m);
 		return m;
 	}

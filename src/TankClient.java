@@ -71,6 +71,7 @@ class TankFrame extends Frame {
 			Missile m = missiles.get(i);
 			m.draw(g);
 			m.hitTanks(tanks);
+			m.hitTank(myTank);
 		}
 		
 		for(int i=0; i<explodes.size(); i++) {
