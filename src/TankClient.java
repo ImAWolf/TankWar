@@ -65,6 +65,9 @@ class TankFrame extends Frame {
 		g.drawString(str, 10, 55);
 		str = "tanks count:" + tanks.size();
 		g.drawString(str, 10, 70);
+		str = "tank life:" + myTank.life;
+		g.drawString(str, 10, 85);
+		
 		
 		myTank.draw(g);
 		w1.draw(g);
@@ -73,7 +76,7 @@ class TankFrame extends Frame {
 			Missile m = missiles.get(i);
 			m.draw(g);
 			m.hitTanks(tanks);
-			//m.hitTank(myTank);
+			m.hitTank(myTank);
 			m.hitWall(w1);
 		}
 		

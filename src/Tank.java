@@ -21,6 +21,7 @@ public class Tank {
 	public boolean bGood;
 	public boolean live = true;
 	public int oldX,oldY;
+	public int life = 100;
 	
 	public static Random r = new Random();
 	private int step = r.nextInt(12) + 3;
