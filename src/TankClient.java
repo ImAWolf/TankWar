@@ -23,7 +23,7 @@ class TankFrame extends Frame {
 	public static final int GAME_HIGHT = 400;		
 	private Image offScreenImage = null;
 	
-	Tank myTank = new Tank(100,100,true,this);
+	Tank myTank = new Tank(100,100,true,Tank.Direction.STOP,this);
 	 
 	List<Explode> explodes = new ArrayList<Explode>();
 	List<Missile> missiles = new ArrayList<Missile>();
@@ -35,7 +35,8 @@ class TankFrame extends Frame {
 
 	public void launch() {
 		for(int i=0; i<10; i++) {
-			tanks.add(new Tank(50 + 40*(i+1),50,false,this));
+			Tank t = new Tank(50 + 40*(i+1),50,false,Tank.Direction.D,this); 
+			tanks.add(t);
 		}
 		
 		this.setLocation(400, 300);

@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class Tank {
 	// Ì¹¿ËÎ»ÖÃ
@@ -19,6 +20,8 @@ public class Tank {
 	public boolean bGood;
 	public boolean live = true;
 	
+	public static Random r = new Random();
+	
 	public enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
 	};
@@ -35,6 +38,12 @@ public class Tank {
 	public Tank(int x, int y,boolean bGood,TankFrame tf) {
 		this(x,y,bGood);
 		this.tf = tf;
+	}
+	
+	public Tank(int x, int y,boolean bGood,Direction dir,TankFrame tf) {
+		this(x,y,bGood,tf);
+		this.dir = dir;
+		 
 	}
 
 	public void draw(Graphics g) {
@@ -136,6 +145,12 @@ public class Tank {
 		}
 		if(y > borderD) {
 			y = borderD;
+		}
+		
+		if(!bGood) {
+			Direction[] dirs = Direction.values();
+			int rn = r.nextInt(dirs.length);
+			this.dir = dirs[rn];
 		}
 	}
 
