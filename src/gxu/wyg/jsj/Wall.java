@@ -1,15 +1,14 @@
+package gxu.wyg.jsj;
+
 import java.awt.*;
 
 public class Wall {
 	private int x,y,w,h;
-	private TankFrame tf;
-	
 	public Wall(int x, int y, int w, int h,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		this.tf = tf;
 	}
 	
 	public void draw(Graphics g) {

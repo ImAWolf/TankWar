@@ -1,3 +1,5 @@
+package gxu.wyg.jsj;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -21,6 +23,7 @@ public class Tank {
 	public boolean bGood;
 	public boolean live = true;
 	public int oldX,oldY;
+	public Direction oldDir;
 	public int life = 100;
 	private BloodBar bb = new BloodBar();
 	
@@ -165,12 +168,13 @@ public class Tank {
 			if(step == 0) {
 				int rn = r.nextInt(dirs.length);
 				this.dir = dirs[rn];			
-				this.ptDir = this.dir;
+				if(this.dir != Direction.STOP) //使生成的子弹可以飞行
+					this.ptDir = this.dir;
 				
 				step = r.nextInt(12) + 3;
 			}		
 			step --;	
-			if(r.nextInt(40) > 38 )
+			if(r.nextInt(40) > 38 ) //机器坦克随机开火
 				this.fire();
 		}
 				
@@ -178,13 +182,14 @@ public class Tank {
 
 	public void keyPressed(KeyEvent e) {
 		//if(this.live == false) return;
-		
+		oldDir = this.dir; 
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_F2:
+		case KeyEvent.VK_F2: //主战坦克满血复活
 			if(!this.live) {
 				this.live = true;
 				this.life = 100;
+				this.dir = Direction.STOP;
 			}
 			break;
 		case KeyEvent.VK_LEFT:
@@ -233,6 +238,10 @@ public class Tank {
 
 	//重新定位方向
 	public void locateDirection() {
+		if(this.live == false) {
+			bL = bU = bR = bD = false;
+		}
+		
 		if (bL && !bU && !bR && !bD) {
 			dir = Direction.L;
 		} else if (bL && bU && !bR && !bD) {
@@ -258,7 +267,7 @@ public class Tank {
 		} else if (bL && bU && bR && bD) { 
 			dir = Direction.STOP;
 		}
-		
+		oldDir = this.dir;
 		if(this.dir != Direction.STOP)
 			ptDir = dir;
 	}

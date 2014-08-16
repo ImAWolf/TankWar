@@ -1,3 +1,5 @@
+package gxu.wyg.jsj;
+
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -8,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class TankClient {	
 	public static void main(String[] args) {

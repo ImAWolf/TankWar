@@ -1,6 +1,9 @@
+package gxu.wyg.jsj;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 
 
 public class Blood {
@@ -9,6 +12,7 @@ public class Blood {
 	TankFrame tf = null;
 	int step = 0;
 	public boolean live = true;
+	private Random r = new Random();
 	
 	private int[][] pos= {
 			{350,300},{360,300},{380,336},{265,378},
@@ -41,7 +45,9 @@ public class Blood {
 	}
 
 	private void move() {
-		step ++;
+		if(r.nextInt(50) > 45) {
+			step ++;
+		}
 		if(step == pos.length) {
 			step = 0;
 		}
